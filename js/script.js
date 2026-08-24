@@ -37,15 +37,17 @@ function updateViews() {
 
 function setActiveChat(chatId) {
   appState.activeChatId = chatId || null;
-
   updateViews();
+
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    closeSidebar();
+  }
 
   if (appState.activeChatId) {
     renderConversation();
   }
-
-  closeSidebar();
 }
+
 document.addEventListener("conversation:changed", (event) => {
   setActiveChat(event.detail?.chatId ?? "");
 });
