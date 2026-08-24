@@ -1,0 +1,41 @@
+@use "abstracts/variables";
+@use "abstracts/mixins";
+
+@use "base/reset";
+
+@use "layout/sidebar";
+
+@use "sections/chat";
+@use "sections/conversations";
+
+body {
+    overflow-x: hidden;
+}
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1rem;
+  min-height: 100vh;
+  transition: grid-template-columns 0.3s ease;
+
+  &--sidebar-collapsed {
+    grid-template-columns: 0 minmax(0, 1fr);
+    gap: 0;
+  }
+}
+
+.sidebar {
+  width: 260px;
+  min-width: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar--collapsed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.content {
+  min-width: 0;
+}

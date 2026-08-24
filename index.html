@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="scss/style.css" />
+    <script src="js/script.js" defer type="module"></script>
+  </head>
+
+  <body>
+    <div class="main-wrapper" id="mainWrapper">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__nav">
+          <div>
+            <h3>
+              <span class="primary-logo">ChatGPT</span>
+              <span class="secondary-logo">Go</span>
+            </h3>
+          </div>
+          <div class="sidebar-actions">
+            <img src="assets/icons/search.svg" alt="search icon" class="icon" />
+            <button
+              class="sidebar-actions__toggle"
+              type="button"
+              data-sidebar-toggle
+              aria-label="Close toggle"
+            >
+              <img
+                src="assets/icons/layout-sidebar.svg"
+                alt="sidebar icon"
+                class="icon"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="sidebar__top">
+          <div class="chat">
+            <a href=""
+              ><img
+                src="assets/icons/edit.svg"
+                alt="new chat icon"
+                class="icon"
+            /></a>
+            <p>New chat</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img
+                src="assets/icons/library.svg"
+                alt="library icon"
+                class="icon"
+            /></a>
+            <p>Library</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img
+                src="assets/icons/folder.svg"
+                alt="Projects icon"
+                class="icon"
+            /></a>
+            <p>Projects</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img src="assets/icons/clock.svg" alt="clock icon" class="icon"
+            /></a>
+            <p>Scheduled</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img src="assets/icons/plug.svg" alt="plugins icon" class="icon"
+            /></a>
+            <p>Plugins</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img src="assets/icons/codex.svg" alt="codex icon" class="icon"
+            /></a>
+            <p>Codex</p>
+          </div>
+          <div class="chat">
+            <a href=""
+              ><img src="assets/icons/dots.svg" alt="more icon" class="icon"
+            /></a>
+            <p>More</p>
+          </div>
+        </div>
+        <div class="sidebar__bottom">
+          <div
+            id="chatHistory"
+            class="sidebar__history"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="sidebar__footer">
+          <div class="footer-container">
+            <img
+              src="assets/icons/user.svg"
+              alt="user icon"
+              class="icon user-icon"
+            />
+            <div class="user-section">
+              <p class="username">Om Tripathi</p>
+              <p class="model">Go</p>
+            </div>
+            <img
+              src="assets/icons/building-store.svg"
+              alt=""
+              class="shop-icon"
+            />
+          </div>
+        </div>
+      </aside>
+
+      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+      <div class="content">
+        <div class="content__top">
+          <button
+            class="chat-icon"
+            type="button"
+            data-sidebar-open
+            aria-label="Open sidebar"
+          >
+            <img
+              src="assets/icons/layout-sidebar.svg"
+              alt="sidebar icon"
+              class="message-icon"
+            />
+          </button>
+        </div>
+
+        <main class="content__middle">
+          <section id="landingView" class="landing-view">
+            <h1 class="content-heading">What’s on your mind today?</h1>
+
+            <div class="composer-wrapper">
+              <form class="search" id="landingComposer">
+                <button
+                  class="search__add"
+                  id="uploadTrigger"
+                  type="button"
+                  aria-label="Add attachment"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="assets/icons/plus.svg"
+                    alt=""
+                    class="icon-content"
+                  />
+                </button>
+
+                <textarea
+                  class="search__input"
+                  id="landingInput"
+                  placeholder="Ask anything"
+                  rows="1"
+                  aria-label="Ask anything"
+                ></textarea>
+
+                <div class="search__actions">
+                  <div class="model-selector">
+                    <button
+                      class="model-selector__trigger"
+                      id="modelSelectorTrigger"
+                      type="button"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src="assets/icons/brain.svg"
+                        alt=""
+                        class="icon-content"
+                      />
+
+                      <span id="selectedModel">GPT-5</span>
+
+                      <span class="model-selector__arrow">⌄</span>
+                    </button>
+
+                    <div
+                      class="model-selector__menu"
+                      id="modelSelectorMenu"
+                      hidden
+                    >
+                      <button
+                        class="model-selector__option active"
+                        type="button"
+                        data-model="GPT-5"
+                      >
+                        <span class="model-selector__option-main">
+                          <strong>GPT-5</strong>
+                          <small>Best for complex tasks</small>
+                        </span>
+
+                        <span class="model-selector__check">✓</span>
+                      </button>
+
+                      <button
+                        class="model-selector__option"
+                        type="button"
+                        data-model="GPT-4"
+                      >
+                        <span class="model-selector__option-main">
+                          <strong>GPT-4</strong>
+                          <small>Fast and capable</small>
+                        </span>
+
+                        <span class="model-selector__check">✓</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    class="search__mic"
+                    type="button"
+                    aria-label="Voice input"
+                  >
+                    <img
+                      src="assets/icons/microphone.svg"
+                      alt="mic icon"
+                      class="icon-content"
+                    />
+                  </button>
+
+                  <button
+                    class="search__voice"
+                    type="submit"
+                    aria-label="Send message"
+                  >
+                    <img
+                      src="assets/icons/voice.svg"
+                      alt="voice icon"
+                      class="icon-content voice-svg"
+                    />
+                  </button>
+                </div>
+              </form>
+              <input
+                type="file"
+                id="fileInput"
+                hidden
+                multiple
+                accept="image/*,.pdf,.doc,.docx,.txt"
+              />
+
+              <div
+                class="upload-modal"
+                id="uploadModal"
+                role="dialog"
+                aria-label="Upload options"
+                hidden
+              >
+                <button class="upload-option" id="uploadFiles" type="button">
+                  <span class="upload-option__icon">
+                    <img src="assets/icons/paperclip.svg" alt="" />
+                  </span>
+
+                  <span class="upload-option__content">
+                    <span class="upload-option__title">Add photos & files</span>
+                    <span class="upload-option__description"
+                      >Upload from computer</span
+                    >
+                  </span>
+                </button>
+
+                <button class="upload-option" id="addFromLibrary" type="button">
+                  <span class="upload-option__icon">
+                    <img src="assets/icons/library.svg" alt="" />
+                  </span>
+
+                  <span class="upload-option__content">
+                    <span class="upload-option__title">Add from library</span>
+                    <span class="upload-option__description">
+                      Browse and search your files
+                    </span>
+                  </span>
+                </button>
+
+                <button class="upload-option" id="createImage" type="button">
+                  <span class="upload-option__icon">
+                    <img src="assets/icons/photo.svg" alt="" />
+                  </span>
+
+                  <span class="upload-option__content">
+                    <span class="upload-option__title">Create image</span>
+                    <span class="upload-option__description"
+                      >Visualize anything</span
+                    >
+                  </span>
+                </button>
+
+                <button class="upload-option" id="webSearch" type="button">
+                  <span class="upload-option__icon">
+                    <img src="assets/icons/world.svg" alt="" />
+                  </span>
+
+                  <span class="upload-option__content">
+                    <span class="upload-option__title">Web search</span>
+                    <span class="upload-option__description">
+                      Find real-time news and info
+                    </span>
+                  </span>
+                </button>
+
+                <button class="upload-option" id="deepResearch" type="button">
+                  <span class="upload-option__icon">
+                    <img src="assets/icons/search.svg" alt="" />
+                  </span>
+
+                  <span class="upload-option__content">
+                    <span class="upload-option__title">Deep research</span>
+                    <span class="upload-option__description">
+                      Get a detailed report
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="suggestions">
+              <button class="suggestions__btn" type="button">
+                <img
+                  src="assets/icons/photo.svg"
+                  alt=""
+                  class="suggestion-img"
+                />
+                <span class="suggestion-text">Create an image</span>
+              </button>
+
+              <button class="suggestions__btn" type="button">
+                <img
+                  src="assets/icons/pencil.svg"
+                  alt=""
+                  class="suggestion-img"
+                />
+                <span class="suggestion-text">Write or edit</span>
+              </button>
+
+              <button class="suggestions__btn" type="button">
+                <img
+                  src="assets/icons/world.svg"
+                  alt=""
+                  class="suggestion-img"
+                />
+                <span class="suggestion-text">Search the web</span>
+              </button>
+            </div>
+          </section>
+
+          <section id="chatView" class="chat-view" hidden>
+            <div class="chat-window" id="chatWindow" aria-live="polite"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
