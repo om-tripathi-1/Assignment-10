@@ -39,6 +39,20 @@ $hover-bg: rgba(0, 0, 0, 0.06);
 $modal-radius: 18px;
 $option-radius: 12px;
 
-$modal-shadow:
-  0 12px 40px rgba(0, 0, 0, 0.12),
-  0 2px 8px rgba(0, 0, 0, 0.08);
+$modal-overlay: rgba(0, 0, 0, 0.45);
+$modal-shadow: rgba(0, 0, 0, 0.2);
+$border-color: rgba(0, 0, 0, 0.1);
+
+$modal-z-index: 100;
+$modal-sidebar-width: 14rem;
+$modal-width: 46rem;
+$modal-height: 40rem;
+
+$modal-padding: 1.25rem;
+$modal-small-padding: 0.75rem;
+$modal-gap: 1rem;
+
+$small-border-radius: 0.75rem;
+$large-border-radius: 1.25rem;
+
+$transition-fast: 0.2s;

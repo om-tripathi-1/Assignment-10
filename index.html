@@ -101,22 +101,26 @@
           ></div>
         </div>
         <div class="sidebar__footer">
-          <div class="footer-container">
-            <img
-              src="assets/icons/user.svg"
-              alt="user icon"
-              class="icon user-icon"
-            />
+          <button
+            class="footer-container"
+            id="settingsTrigger"
+            type="button"
+            aria-label="Open settings"
+            aria-expanded="false"
+          >
+            <img src="assets/icons/user.svg" alt="" class="icon user-icon" />
+
             <div class="user-section">
               <p class="username">Om Tripathi</p>
               <p class="model">Go</p>
             </div>
+
             <img
               src="assets/icons/building-store.svg"
               alt=""
               class="shop-icon"
             />
-          </div>
+          </button>
         </div>
       </aside>
 
@@ -359,6 +363,219 @@
             <div class="chat-window" id="chatWindow" aria-live="polite"></div>
           </section>
         </main>
+      </div>
+    </div>
+    <div
+      class="settings-modal"
+      id="settingsModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settingsTitle"
+      hidden
+    >
+      <div class="settings-modal__overlay" id="settingsOverlay"></div>
+
+      <div class="settings-modal__container">
+        <aside class="settings-modal__sidebar">
+          <div class="settings-modal__top">
+            <button
+              class="settings-modal__close"
+              id="settingsClose"
+              type="button"
+              aria-label="Close settings"
+            >
+              ×
+            </button>
+          </div>
+
+          <div class="settings-search">
+            <img
+              class="settings-search__icon"
+              src="assets/icons/search.svg"
+              alt=""
+            />
+
+            <input
+              class="settings-search__input"
+              type="text"
+              placeholder="Search settings"
+            />
+          </div>
+
+          <nav class="settings-nav">
+            <button
+              class="settings-nav__item active"
+              data-settings-tab="general"
+              type="button"
+            >
+              <span class="settings-nav__label">General</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="notifications"
+              type="button"
+            >
+              <span class="settings-nav__label">Notifications</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="personalization"
+              type="button"
+            >
+              <span class="settings-nav__label">Personalization</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="plugins"
+              type="button"
+            >
+              <span class="settings-nav__label">Plugins</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="voice"
+              type="button"
+            >
+              <span class="settings-nav__label">Voice</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="billing"
+              type="button"
+            >
+              <span class="settings-nav__label">Billing</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="data"
+              type="button"
+            >
+              <span class="settings-nav__label">Data controls</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="storage"
+              type="button"
+            >
+              <span class="settings-nav__label">Storage</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="security"
+              type="button"
+            >
+              <span class="settings-nav__label">Safety</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="login"
+              type="button"
+            >
+              <span class="settings-nav__label">Security and login</span>
+            </button>
+
+            <button
+              class="settings-nav__item"
+              data-settings-tab="account"
+              type="button"
+            >
+              <span class="settings-nav__label">Account</span>
+            </button>
+          </nav>
+        </aside>
+
+        <section class="settings-modal__content">
+          <div class="settings-content__header">
+            <h2 class="settings-content__title" id="settingsTitle">General</h2>
+          </div>
+
+          <div class="settings-content__body">
+            <div class="settings-security-card">
+              <button
+                class="settings-card__dismiss"
+                id="dismissSecurityCard"
+                type="button"
+              >
+                ×
+              </button>
+
+              <div class="settings-security-card__icon">🔒</div>
+
+              <h3 class="settings-security-card__title">Secure your account</h3>
+
+              <p class="settings-security-card__description">
+                Add multi-factor authentication (MFA), like a text message or
+                authenticator app, to help protect your account when logging in.
+              </p>
+
+              <button class="settings-mfa-btn" type="button">Set up MFA</button>
+            </div>
+
+            <div class="settings-list">
+              <button class="settings-row" type="button">
+                <span class="settings-row__label">Appearance</span>
+
+                <span class="settings-row__value">
+                  <span class="settings-row__text">System</span>
+                  <span class="settings-row__arrow">⌄</span>
+                </span>
+              </button>
+
+              <button class="settings-row" type="button">
+                <span class="settings-row__label">Contrast</span>
+
+                <span class="settings-row__value">
+                  <span class="settings-row__text">System</span>
+                  <span class="settings-row__arrow">⌄</span>
+                </span>
+              </button>
+
+              <button class="settings-row" type="button">
+                <span class="settings-row__label">Accent color</span>
+
+                <span class="settings-row__value">
+                  <span class="accent-dot"></span>
+                  <span class="settings-row__text">Default</span>
+                  <span class="settings-row__arrow">⌄</span>
+                </span>
+              </button>
+
+              <button class="settings-row" type="button">
+                <span class="settings-row__label">Language</span>
+
+                <span class="settings-row__value">
+                  <span class="settings-row__text">Auto-detect</span>
+                  <span class="settings-row__arrow">⌄</span>
+                </span>
+              </button>
+
+              <div class="settings-row settings-row--toggle">
+                <div class="settings-row__content">
+                  <span class="settings-row__label"> Higher intelligence </span>
+
+                  <small class="settings-row__description">
+                    ChatGPT can automatically use a higher intelligence setting
+                    when you ask a complex question.
+                  </small>
+                </div>
+
+                <label class="switch">
+                  <input class="switch__input" type="checkbox" checked />
+                  <span class="switch__slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </body>

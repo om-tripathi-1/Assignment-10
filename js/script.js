@@ -3,6 +3,8 @@ import { createChatFromPrompt, renderConversation } from "./chat.js";
 import { appState } from "./data.js";
 import { initSidebar, closeSidebar } from "./sidebar.js";
 import { submitOnEnter } from "./utils.js";
+import { initSettingsModal } from "./settings-modal.js";
+
 
 const landingView = document.querySelector("#landingView");
 const chatView = document.querySelector("#chatView");
@@ -79,6 +81,7 @@ if (landingInput) {
 }
 
 initSidebar();
+initSettingsModal();
 renderChatHistory();
 updateViews();
 

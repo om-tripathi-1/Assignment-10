@@ -128,7 +128,9 @@ export const conversation = {
 };
 
 export function getActiveConversation() {
-  const activeChat = chatHistory.find((chat) => chat.id === appState.activeChatId);
+  const activeChat = chatHistory.find(
+    (chat) => chat.id === appState.activeChatId,
+  );
 
   if (!activeChat) {
     return conversation;
