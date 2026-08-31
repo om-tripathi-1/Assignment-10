@@ -40,9 +40,8 @@ export async function copyTextToClipboard(text) {
       await navigator.clipboard.writeText(value);
       return true;
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error);
-    
   }
 
   const tempTextArea = document.createElement("textarea");
@@ -72,7 +71,7 @@ export function showCopyFeedback(button) {
   }, 900);
 }
 
-export function autoResizeTextarea(textarea, maxHeight = 180) {
+function autoResizeTextarea(textarea, maxHeight = 180) {
   textarea.style.height = "auto";
   textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
 }

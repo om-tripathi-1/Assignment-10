@@ -1,6 +1,5 @@
 import {
   getCurrentChat,
-  getCurrentChatId,
   getMessageById,
   toggleReaction,
   appendUserAndAssistantMessage,
@@ -123,4 +122,4 @@ export function renderConversation() {
   bindComposer(chatWindow);
 }
 
-export { createChatFromPrompt, getCurrentChatId };
+export { createChatFromPrompt };

@@ -1,7 +1,7 @@
 const sidebar = document.querySelector("#sidebar");
 const sidebarOverlay = document.querySelector("#sidebarOverlay");
 const mainWrapper = document.querySelector("#mainWrapper");
-
+const openSidebarBtn = document.querySelector("#open-btn");
 const mobileSidebarMedia = window.matchMedia("(max-width: 900px)");
 
 function isMobileViewport() {
@@ -10,6 +10,7 @@ function isMobileViewport() {
 
 export function openSidebar() {
   if (!sidebar) return;
+  openSidebarBtn.hidden = true;
 
   if (isMobileViewport()) {
     mainWrapper?.classList.add("main-wrapper--sidebar-open");
@@ -25,6 +26,7 @@ export function openSidebar() {
 
 export function closeSidebar() {
   if (!sidebar) return;
+  openSidebarBtn.hidden = false;
 
   if (isMobileViewport()) {
     mainWrapper?.classList.remove("main-wrapper--sidebar-open");
@@ -46,20 +48,11 @@ export function toggleSidebar() {
   if (!sidebar) return;
 
   if (isMobileViewport()) {
-    if (sidebar.classList.contains("sidebar--open")) {
-      closeSidebar();
-    } else {
-      openSidebar();
-    }
-
+    sidebar.classList.contains("sidebar--open") ? closeSidebar() : openSidebar();
     return;
   }
 
-  if (sidebar.classList.contains("sidebar--collapsed")) {
-    openSidebar();
-  } else {
-    closeSidebar();
-  }
+  sidebar.classList.contains("sidebar--collapsed") ? openSidebar() : closeSidebar();
 }
 
 function syncSidebarWithViewport() {
@@ -87,34 +80,22 @@ function syncSidebarWithViewport() {
 }
 
 export function initSidebar() {
+  openSidebarBtn.hidden = true;
+
   document.addEventListener("click", (event) => {
-    if (event.target.closest("[data-sidebar-open]")) {
-      openSidebar();
-    }
-
-    if (event.target.closest("[data-sidebar-close]")) {
-      closeSidebar();
-    }
-
-    if (event.target.closest("[data-sidebar-toggle]")) {
-      toggleSidebar();
-    }
+    if (event.target.closest("[data-sidebar-open]")) openSidebar();
+    if (event.target.closest("[data-sidebar-close]")) closeSidebar();
+    if (event.target.closest("[data-sidebar-toggle]")) toggleSidebar();
   });
 
   sidebarOverlay?.addEventListener("click", closeSidebar);
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      if (isMobileViewport()) {
-        closeSidebar();
-      }
+    if (event.key === "Escape" && isMobileViewport()) {
+      closeSidebar();
     }
   });
 
   syncSidebarWithViewport();
-
-  mobileSidebarMedia.addEventListener(
-    "change",
-    syncSidebarWithViewport
-  );
+  mobileSidebarMedia.addEventListener("change", syncSidebarWithViewport);
 }

@@ -79,7 +79,7 @@ ol {
   position: sticky;
   background-color: #FCFCFC;
 }
-.sidebar__nav .primary-logo {
+.sidebar__nav.primary-logo {
   color: #0D0D0D;
   font-size: 1.2rem;
   font-weight: 550;
@@ -568,7 +568,7 @@ ol {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0.1rem;
   padding-top: 1rem;
   box-sizing: border-box;
@@ -1023,7 +1023,7 @@ ol {
 .message__content p {
   margin: 0 0 1rem;
   line-height: 1.7;
-  color: #0d0d0d;
+  color: #000000;
 }
 .message__content h3 {
   margin: 1.5rem 0 0.75rem;

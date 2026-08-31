@@ -20,13 +20,13 @@
         position: sticky;
         background-color: $white-2;
 
-        .primary-logo {
+        &.primary-logo {
             color: $black-2;
             font-size: $heading-font-size;
             font-weight: $heading-font-weight;
         }
 
-        .secondary-logo {
+        & .secondary-logo {
             color: $grey-1;
         }
 

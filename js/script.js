@@ -5,36 +5,68 @@ import { initSidebar, closeSidebar } from "./sidebar.js";
 import { submitOnEnter } from "./utils.js";
 import { initSettingsModal } from "./settings-modal.js";
 
-
 const landingView = document.querySelector("#landingView");
 const chatView = document.querySelector("#chatView");
 const contentMiddle = document.querySelector(".content__middle");
 const landingComposer = document.querySelector("#landingComposer");
 const landingInput = document.querySelector("#landingInput");
+
 const uploadTrigger = document.querySelector("#uploadTrigger");
 const uploadModal = document.querySelector("#uploadModal");
 const fileInput = document.querySelector("#fileInput");
 const uploadFiles = document.querySelector("#uploadFiles");
+
 const modelSelectorTrigger = document.querySelector("#modelSelectorTrigger");
 const modelSelectorMenu = document.querySelector("#modelSelectorMenu");
 const selectedModel = document.querySelector("#selectedModel");
 const modelOptions = document.querySelectorAll(".model-selector__option");
 
+function createToggleableMenu(trigger, menu) {
+  function open() {
+    menu.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+  }
+
+  function close() {
+    menu.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+  }
+
+  function toggle() {
+    menu.hidden ? open() : close();
+  }
+
+  function isOpen() {
+    return !menu.hidden;
+  }
+
+  function closeIfClickedOutside(event) {
+    const clickedInside = menu.contains(event.target) || trigger.contains(event.target);
+    if (!clickedInside && isOpen()) close();
+  }
+
+  function closeOnEscape(event) {
+    if (event.key === "Escape" && isOpen()) close();
+  }
+
+  trigger.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggle();
+  });
+
+  document.addEventListener("click", closeIfClickedOutside);
+  document.addEventListener("keydown", closeOnEscape);
+
+  return { open, close, toggle };
+}
+
 function updateViews() {
   const isChatOpen = Boolean(appState.activeChatId);
 
-  if (landingView) {
-    landingView.hidden = isChatOpen;
-  }
+  if (landingView) landingView.hidden = isChatOpen;
+  if (chatView) chatView.hidden = !isChatOpen;
 
-  if (chatView) {
-    chatView.hidden = !isChatOpen;
-  }
-
-  contentMiddle?.classList.toggle(
-    "content__middle--chat",
-    isChatOpen
-  );
+  contentMiddle?.classList.toggle("content__middle--chat", isChatOpen);
 }
 
 function setActiveChat(chatId) {
@@ -85,29 +117,7 @@ initSettingsModal();
 renderChatHistory();
 updateViews();
 
-
-function openUploadModal() {
-  uploadModal.hidden = false;
-  uploadTrigger.setAttribute("aria-expanded", "true");
-}
-
-function closeUploadModal() {
-  uploadModal.hidden = true;
-  uploadTrigger.setAttribute("aria-expanded", "false");
-}
-
-function toggleUploadModal() {
-  if (uploadModal.hidden) {
-    openUploadModal();
-  } else {
-    closeUploadModal();
-  }
-}
-
-uploadTrigger.addEventListener("click", (event) => {
-  event.stopPropagation();
-  toggleUploadModal();
-});
+const uploadMenu = createToggleableMenu(uploadTrigger, uploadModal);
 
 uploadFiles.addEventListener("click", () => {
   fileInput.click();
@@ -115,90 +125,27 @@ uploadFiles.addEventListener("click", () => {
 
 fileInput.addEventListener("change", (event) => {
   const files = [...event.target.files];
-
   if (!files.length) return;
 
-  console.log("Selected files:", files);
-
   files.forEach((file) => {
-    console.log({
-      name: file.name,
-      type: file.type,
-      size: file.size,
-    });
+    console.log({ name: file.name, type: file.type, size: file.size });
   });
 
-  closeUploadModal();
-
+  uploadMenu.close();
   fileInput.value = "";
 });
 
-document.addEventListener("click", (event) => {
-  const clickedInsideModal = uploadModal.contains(event.target);
-  const clickedTrigger = uploadTrigger.contains(event.target);
-
-  if (!clickedInsideModal && !clickedTrigger && !uploadModal.hidden) {
-    closeUploadModal();
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !uploadModal.hidden) {
-    closeUploadModal();
-  }
-});
-
-
-modelSelectorTrigger.addEventListener("click", (event) => {
-  event.stopPropagation();
-
-  const isHidden = modelSelectorMenu.hidden;
-
-  modelSelectorMenu.hidden = !isHidden;
-
-  modelSelectorTrigger.setAttribute("aria-expanded", String(isHidden));
-});
+const modelSelectorMenuControl = createToggleableMenu(modelSelectorTrigger, modelSelectorMenu);
 
 modelOptions.forEach((option) => {
   option.addEventListener("click", () => {
     const model = option.dataset.model;
-
     selectedModel.textContent = model;
 
-    modelOptions.forEach((item) => {
-      item.classList.remove("active");
-    });
-
+    modelOptions.forEach((item) => item.classList.remove("active"));
     option.classList.add("active");
 
-    modelSelectorMenu.hidden = true;
-
-    modelSelectorTrigger.setAttribute("aria-expanded", "false");
-
+    modelSelectorMenuControl.close();
     console.log("Selected model:", model);
   });
-});
-
-document.addEventListener("click", (event) => {
-  const selector = document.querySelector(".model-selector");
-
-  if (
-    selector &&
-    !selector.contains(event.target) &&
-    !modelSelectorMenu.hidden
-  ) {
-    modelSelectorMenu.hidden = true;
-
-    modelSelectorTrigger.setAttribute("aria-expanded", "false");
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    if (!modelSelectorMenu.hidden) {
-      modelSelectorMenu.hidden = true;
-
-      modelSelectorTrigger.setAttribute("aria-expanded", "false");
-    }
-  }
 });

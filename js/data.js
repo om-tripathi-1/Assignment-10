@@ -120,21 +120,3 @@ export const mockResponseActions = [
   "Keep the UI state in one place so view switches remain predictable.",
   "If needed, I can generate a stricter version with edge-case handling.",
 ];
-
-export const conversation = {
-  id: "chat-1",
-  title: "What is JavaScript?",
-  messages: chatHistory[0].messages,
-};
-
-export function getActiveConversation() {
-  const activeChat = chatHistory.find(
-    (chat) => chat.id === appState.activeChatId,
-  );
-
-  if (!activeChat) {
-    return conversation;
-  }
-
-  return activeChat;
-}
